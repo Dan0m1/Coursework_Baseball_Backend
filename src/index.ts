@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({path: '/var/www/baseballbackend/_work/.env'});
 var compression = require('compression')
 import express from 'express';
 import scheduleRoutes from './api/v1/routes/ScheduleRoutes'
