@@ -15,7 +15,7 @@ datasource db {
 }
 
 model User {
-  id      BigInt   @id
+  id      String   @id
   name    String
   Tickets Ticket[]
 }
@@ -23,12 +23,13 @@ model User {
 model Ticket {
   id          Int      @id @default(autoincrement())
   game        Game     @relation(fields: [gameId], references: [id])
-  gameId      BigInt
-  place       String
-  userId      BigInt
+  gameId      String
+  userId      String
   user        User     @relation(fields: [userId], references: [id])
   boughtAt    DateTime @default(now())
-  transaction String
+  transaction String   @default(cuid())
+  email   String
+  place String
 }
 
 model Schedule {
@@ -39,7 +40,7 @@ model Schedule {
 }
 
 model Game {
-  id               BigInt   @id
+  id               String   @id
   name             String
   homeTeam         String
   awayTeam         String
