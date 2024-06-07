@@ -17,7 +17,7 @@ export class TicketService {
         return this.ticketRepository.create(data);
     }
 
-    async getAllByUserId(body: GetAllTicketDTO) {
+    async getAllByUserId(body: GetAllTicketDTO): Promise<DBTicket[]> {
         const {userId} = body;
 
         const tickets = await this.ticketRepository.findMany(userId);

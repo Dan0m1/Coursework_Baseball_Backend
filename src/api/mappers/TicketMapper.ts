@@ -4,7 +4,7 @@ import {HTMLData} from "../../templates/HTML/HTMLData";
 
 export class TicketMapper {
     getTickets(tickets: DBTicket[]):TicketResponse[]{
-        return tickets.map((ticket) => ({
+        return tickets.map((ticket: DBTicket) => ({
             id: ticket.id,
             game: {
                 id: ticket.game.id,

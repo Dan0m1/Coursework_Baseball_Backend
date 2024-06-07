@@ -1,6 +1,5 @@
 import {ScheduleRepository} from "../../database/repositories/ScheduleRepository";
 import {DBSchedule} from "../../database/entities/DBSchedule";
-import {DBGame} from "../../database/entities/DBGame";
 import {CreateScheduleDTO} from "../../dtos/CreateScheduleDTO";
 import {UpdateScheduleDTO} from "../../dtos/UpdateScheduleDTO";
 import {GetScheduleDTO} from "../../dtos/GetScheduleDTO";
@@ -74,7 +73,7 @@ export class ScheduleService {
         return(DBresponse);
     }
 
-    async buildResponse(response: API_DBSchedule) {
+    private async buildResponse(response: API_DBSchedule) {
         console.log(response)
         const result = [];
         for (const game in response.games){

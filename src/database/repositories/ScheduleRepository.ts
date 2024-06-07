@@ -1,6 +1,5 @@
 import {Prisma, PrismaClient} from "@prisma/client";
 import {DBSchedule} from "../entities/DBSchedule";
-import {DBTicket} from "../entities/DBTicket";
 
 export class ScheduleRepository {
     constructor(private prisma = new PrismaClient()) {}

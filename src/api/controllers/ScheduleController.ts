@@ -3,6 +3,7 @@ import {ScheduleMapper} from "../mappers/ScheduleMapper";
 import {Request, Response} from "express";
 import {GetScheduleDTO} from "../../dtos/GetScheduleDTO";
 import {DBSchedule} from "../../database/entities/DBSchedule";
+import {ScheduleWithGamesResponse} from "../responses/ScheduleWithGamesResponse";
 
 export class ScheduleController {
     constructor(private scheduleService: ScheduleService, private scheduleMapper: ScheduleMapper) {}
@@ -13,7 +14,7 @@ export class ScheduleController {
             console.log("And here")
 
             const schedule: DBSchedule = await this.scheduleService.getByDate(body)
-            const scheduleWithGames = this.scheduleMapper.getScheduleWithGames(schedule);
+            const scheduleWithGames: ScheduleWithGamesResponse = this.scheduleMapper.getScheduleWithGames(schedule);
             console.log(scheduleWithGames);
             res.send(scheduleWithGames);
         } catch (e){

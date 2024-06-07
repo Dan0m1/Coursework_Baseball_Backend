@@ -1,11 +1,11 @@
 import axios from 'axios';
-import {APIScheduleConfig} from "../../api/config/APIScheduleConfig";
+import Configuration from "../../api/config/Configuration";
 import {API_DBSchedule} from "../entities/API_DBSchedule";
 
 export class APISchedule {
     async get(data: {year: string, month: string, day: string }): Promise<API_DBSchedule>  {
         const options = {
-            ...APIScheduleConfig,
+            ...Configuration().ApiSchedule,
             params: data
         }
         const response = await axios.request(options);

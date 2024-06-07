@@ -1,1 +1,0 @@
-export const emailConfig = {username: 'api', key: process.env.EMAIL_API_KEY, url: "https://api.eu.mailgun.net"};

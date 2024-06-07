@@ -6,6 +6,9 @@ import {CreateTicketDTO} from "../../dtos/CreateTicketDTO";
 import {EmailService} from "../services/EmailService";
 import {HTMLTemplate} from "../../templates/HTML/HTML_Template";
 import {EmailDTO} from "../../dtos/EmailDTO";
+import {DBTicket} from "../../database/entities/DBTicket";
+import {TicketResponse} from "../responses/TicketResponse";
+import {HTMLData} from "../../templates/HTML/HTMLData";
 
 export class TicketController {
     constructor(private ticketService: TicketService, private ticketMapper: TicketMapper, private emailService: EmailService, private htmlTemplate: HTMLTemplate) {}
@@ -14,8 +17,8 @@ export class TicketController {
         const body: GetAllTicketDTO = req.body;
 
         try {
-            const response = await this.ticketService.getAllByUserId(body);
-            const tickets = this.ticketMapper.getTickets(response);
+            const response: DBTicket[] = await this.ticketService.getAllByUserId(body);
+            const tickets: TicketResponse[] = this.ticketMapper.getTickets(response);
             res.send(tickets);
         } catch (e){
             if(e instanceof Error){
@@ -29,14 +32,12 @@ export class TicketController {
     async create(req: Request, res: Response){
         const body: CreateTicketDTO = req.body;
 
-        const response = await this.ticketService.create(body);
-        const ticket = this.ticketMapper.getOneTicket(response);
+        const response: DBTicket = await this.ticketService.create(body);
+        const ticket: TicketResponse = this.ticketMapper.getOneTicket(response);
         res.send(ticket);
 
-        console.log("ticket created")
-
-        const htmlPayload = this.ticketMapper.getHtmlPayload(response);
-        const html = await this.htmlTemplate.getHTML(htmlPayload);
+        const htmlPayload: HTMLData = this.ticketMapper.getHtmlPayload(response);
+        const html: string = await this.htmlTemplate.getHTML(htmlPayload);
         const emailPayload: EmailDTO={
             to: [ticket.email],
             subject: "Квиток MLB",
